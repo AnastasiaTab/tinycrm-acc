@@ -8,6 +8,10 @@
         /// <summary>
         /// 
         /// </summary>
+        public int Age { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public int Id { get; set; }
 
         /// <summary>
