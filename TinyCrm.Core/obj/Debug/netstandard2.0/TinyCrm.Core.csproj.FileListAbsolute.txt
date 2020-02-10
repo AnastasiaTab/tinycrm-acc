@@ -1,0 +1,8 @@
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\bin\Debug\netstandard2.0\TinyCrm.Core.deps.json
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\bin\Debug\netstandard2.0\TinyCrm.Core.dll
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\bin\Debug\netstandard2.0\TinyCrm.Core.pdb
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\obj\Debug\netstandard2.0\TinyCrm.Core.csprojAssemblyReference.cache
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\obj\Debug\netstandard2.0\TinyCrm.Core.AssemblyInfoInputs.cache
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\obj\Debug\netstandard2.0\TinyCrm.Core.AssemblyInfo.cs
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\obj\Debug\netstandard2.0\TinyCrm.Core.dll
+C:\Users\Anastasia.Tab\Copy\Desktop\Νέος φάκελος\TinyCrm.Core\obj\Debug\netstandard2.0\TinyCrm.Core.pdb
