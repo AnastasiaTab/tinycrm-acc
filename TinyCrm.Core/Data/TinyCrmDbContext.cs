@@ -12,6 +12,12 @@ namespace TinyCrm.Core.Data
     {
         private readonly string connectionString_;
 
+        public TinyCrmDbContext() {
+            connectionString_ = 
+                "Server =localhost; Database =newtinycrm-acc; Integrated Security=SSPI;Persist Security Info=False;";
+
+        }
+
         public TinyCrmDbContext(string connString)
         {
             connectionString_ = connString;
@@ -20,10 +26,14 @@ namespace TinyCrm.Core.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            //this.Database.EnsureCreated
 
             modelBuilder
                 .Entity<Model.Customer>()
                 .ToTable("Customer", "core");
+            modelBuilder
+                .Entity<Model.Product>()
+                .ToTable("Product", "core");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

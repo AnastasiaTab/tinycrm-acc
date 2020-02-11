@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using TinyCrm.Core.Model;
 using TinyCrm.Core.Model.Options;
+using TinyCrm.Core.Data;
 
 namespace TinyCrm.Core.Services
 {
@@ -12,52 +13,121 @@ namespace TinyCrm.Core.Services
     public class ProductService : IProductService
     {
         private List<Product> ProductsList = new List<Product>();
-        
+
+        public List<Product> SearchProduct
+            (SearchProductOptions searchProductOptions)
+        {
+            if (searchProductOptions == null)
+            {
+                return null;
+            }
+            using (var context = new TinyCrmDbContext())
+            {
+                var query = context.Set<Product>().AsQueryable();
+
+                if (searchProductOptions.Id != null)
+                {
+                    query = query.
+                    Where(c => c.Id == searchProductOptions.Id);
+                }
+                if (searchProductOptions.Description != null &&
+                    searchProductOptions.Description.Contains(":"))
+                {
+                    query = query.
+                    Where(c => c.Description == searchProductOptions.Description);
+                }
+                if (searchProductOptions != null && 
+                    searchProductOptions.MaxPrice>0)
+                {
+                    query = query.
+                    Where(c => c.Price <= searchProductOptions.MaxPrice );
+                }
+
+                if (searchProductOptions != null &&
+                    searchProductOptions.MinPrice > 0)
+                {
+                    query = query.
+                    Where(c => c.Price >= searchProductOptions.MinPrice);
+                }
+                List<Product> products = query.ToList();
+                return products;
+
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public bool AddProduct(AddProductOptions options)
+        //public bool AddProduct(AddProductOptions options)
+        //{
+        //    if (options == null) {
+        //        return false;
+        //    }
+
+        //    var product = GetProductById(options.Id); 
+
+        //    if (product != null) {
+        //        return false;
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(options.Name)) {
+        //        return false;
+        //    }
+
+        //    if (options.Price <= 0) {
+        //        return false;
+        //    }
+
+        //    if (options.ProductCategory ==
+        //      ProductCategory.Invalid) {
+        //        return false;
+        //    }
+
+        //    product = new Product() {
+        //        Id = options.Id,
+        //        Name = options.Name,
+        //        Price = options.Price,
+        //        Category = options.ProductCategory
+        //    };
+
+        //    product.Id = options.Id;
+        //    product.Name = options.Name;
+        //    product.Price = options.Price;
+        //    product.Category = options.ProductCategory;
+
+        //    ProductsList.Add(product);
+
+        //    return true;
+        //}
+
+        public Product CreateProduct(AddProductOptions options)
         {
-            if (options == null) {
-                return false;
+
+            if (options == null)
+            {
+                return null;
             }
 
-            var product = GetProductById(options.Id); 
-
-            if (product != null) {
-                return false;
+            if (options.Id==null)
+            {
+                return null;
             }
 
-            if (string.IsNullOrWhiteSpace(options.Name)) {
-                return false;
+            var product = new Product();
+
+            using (var context = new TinyCrmDbContext())
+            {
+                //product.Id = options.Id;
+                product.Name = options.Name;
+                product.Category = options.ProductCategory;
+                product.Price = options.Price;
+
+                context.Set<Product>().Add(product);
+                context.SaveChanges();
+                return product;
             }
-
-            if (options.Price <= 0) {
-                return false;
-            }
-
-            if (options.ProductCategory ==
-              ProductCategory.Invalid) {
-                return false;
-            }
-
-            product = new Product() {
-                Id = options.Id,
-                Name = options.Name,
-                Price = options.Price,
-                Category = options.ProductCategory
-            };
-
-            product.Id = options.Id;
-            product.Name = options.Name;
-            product.Price = options.Price;
-            product.Category = options.ProductCategory;
-
-            ProductsList.Add(product);
-
-            return true;
         }
 
         /// <summary>
@@ -66,7 +136,7 @@ namespace TinyCrm.Core.Services
         /// <param name="productId"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public bool UpdateProduct(string productId,
+        public bool UpdateProduct(int productId,
             UpdateProductOptions options)
         {
             if (options == null) {
@@ -108,9 +178,9 @@ namespace TinyCrm.Core.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Product GetProductById(string id)
+        public Product GetProductById(int id)
         {
-            if (string.IsNullOrWhiteSpace(id)) {
+            if (id == null) {
                 return null;
             } 
 
