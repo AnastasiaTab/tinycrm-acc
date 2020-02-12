@@ -4,10 +4,11 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.FileExtensions;
 using Microsoft.Extensions.Configuration.Json;
-
+using TinyCrm.Core.Data;
 using TinyCrm.Core.Model;
 using TinyCrm.Core.Model.Options;
 using TinyCrm.Core.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace TinyCrmConsole
 {
@@ -15,41 +16,68 @@ namespace TinyCrmConsole
     {
         static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", false, true)
-                .Build();
-            var connString = config.GetValue<string>("connectionString");
-
-            var db = new TinyCrm.Core.Data.TinyCrmDbContext(connString);
-            var c = db.Database.EnsureCreated();
-
-            var cust = new Customer()
+            using (var context = new TinyCrmDbContext())
             {
-                Email = "Πνευματικός",
-            };
+                //var customer = new Customer();
+                //customer.Age = 25;
+                //customer.Email = "anastasia.tab@gmail.com";
+                //customer.Firstname = "Anastasia";
 
-            db.Add(cust);
-            db.SaveChanges();
+                //context.Add(customer);
+                //context.SaveChanges();
+                //---------GET CUSTOMER--------
+                //var query = context.Set<Customer>().Where(c => c.Id ==1);
 
-            var results = db.Set<Customer>()
-                .Where(c => c.Email.Equals(
-                    "πνευματικoς"))
-                .FirstOrDefault();
+                //var customer = query.SingleOrDefault();
+                ICustomerService customerService = new CustomerService(context);
+                var results = customerService.SearchCustomer(
+                    new SearchCustomerOptions()
+                    {
+                        Email = "anastasia.tab@gmail.com"
+                    });
+                Console.WriteLine($"Found {results.Count()} customers");
 
-            var productService = new ProductService();
+                ProductService productService = new ProductService(context);
+                var newResults = productService.SearchProduct(
+                    new SearchProductOptions()
+                    {
+                        MaxPrice=1000
+                    });
+                Console.WriteLine($"Found {newResults.Count()} products");
 
-            productService.AddProduct(
-                new AddProductOptions() {
-                    Id = "123",
-                    Price = 13.33M,
-                    ProductCategory = ProductCategory.Cameras,
-                    Name = "Camera 1"
-                });
+                var results2 = customerService.SearchCustomer(
+                    new SearchCustomerOptions()
+                    {
+                        FirstName = "Anastasia"
+                    }
+                    );
+                Console.WriteLine($"Found {results2.Count()} customers");
 
-            productService.UpdateProduct("123",
-                new UpdateProductOptions() {
-                    Price = 22.22M
-                });
+                var options = new AddProductOptions()
+                {
+                   
+                    Name = "pc",
+                    Price = 1000m,
+                    ProductCategory= ProductCategory.Computers
+                };
+                var newProduct = productService.CreateProduct(options);
+                var sum = productService.SumOfStocks();
+                Console.WriteLine($"Found {sum} ");
+
+                //var options = new AddCustomerOptions()
+                //{
+                //    FirstName = "Anastasia",
+                //    VatNumber = "w123",
+                //    Email = "anastasia@gmail.com"
+
+                //};
+
+                //var newCustomer = customerService.CreateCustomer(options);
+
+            }
         }
+           
+
     }
 }
+
