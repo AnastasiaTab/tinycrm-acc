@@ -1,16 +1,20 @@
-﻿namespace TinyCrm.Core.Model
+﻿using System;
+
+namespace TinyCrm.Core.Model
 {
     public class Product
     { 
         /// <summary>
         /// 
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         public string Name { get; set; }
+
+        public int Stock { get; set; }
 
         /// <summary>
         /// 

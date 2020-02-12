@@ -14,11 +14,13 @@ namespace TinyCrm.Core.Services
             (SearchCustomerOptions searchCustomerOptions);
         public List<Customer> SearchCustomer1
             (SearchCustomerOptions searchCustomerOptions);
-        public List<Customer> SearchCustomerByName(
-            SearchCustomerOptions searchCustomerOptions);
+        //public List<Customer> SearchCustomerByName(
+        //    SearchCustomerOptions searchCustomerOptions);
 
         public Customer CreateCustomer(AddCustomerOptions options);
+        public Customer CreateCustomer2(AddCustomerOptions options);
         public Customer GetCustomerById(int id);
+        
     }
    
 }

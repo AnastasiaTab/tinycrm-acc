@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrmConsole\\TinyCrmConsole.csproj": {}
+    "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrmConsole\\TinyCrmConsole.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrm.Core\\TinyCrm.Core.csproj": {
+    "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrm.Core\\TinyCrm.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrm.Core\\TinyCrm.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrm.Core\\TinyCrm.Core.csproj",
         "projectName": "TinyCrm.Core",
-        "projectPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrm.Core\\TinyCrm.Core.csproj",
+        "projectPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrm.Core\\TinyCrm.Core.csproj",
         "packagesPath": "C:\\Users\\Anastasia.Tab\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrm.Core\\obj\\",
+        "outputPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrm.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Anastasia.Tab\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -78,14 +78,14 @@
         }
       }
     },
-    "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrmConsole\\TinyCrmConsole.csproj": {
+    "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrmConsole\\TinyCrmConsole.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrmConsole\\TinyCrmConsole.csproj",
+        "projectUniqueName": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrmConsole\\TinyCrmConsole.csproj",
         "projectName": "TinyCrmConsole",
-        "projectPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrmConsole\\TinyCrmConsole.csproj",
+        "projectPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrmConsole\\TinyCrmConsole.csproj",
         "packagesPath": "C:\\Users\\Anastasia.Tab\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrmConsole\\obj\\",
+        "outputPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrmConsole\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Anastasia.Tab\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -101,8 +101,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrm.Core\\TinyCrm.Core.csproj": {
-                "projectPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc\\TinyCrm.Core\\TinyCrm.Core.csproj"
+              "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrm.Core\\TinyCrm.Core.csproj": {
+                "projectPath": "C:\\Users\\Anastasia.Tab\\devel\\TinyCrm-Acc - backup\\TinyCrm.Core\\TinyCrm.Core.csproj"
               }
             }
           }

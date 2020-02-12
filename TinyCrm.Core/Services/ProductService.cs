@@ -12,6 +12,11 @@ namespace TinyCrm.Core.Services
     /// </summary>
     public class ProductService : IProductService
     {
+        private TinyCrmDbContext dbContext;
+        public ProductService(TinyCrmDbContext context)
+        {
+            dbContext = context;
+        }
         private List<Product> ProductsList = new List<Product>();
 
         public List<Product> SearchProduct
@@ -21,17 +26,15 @@ namespace TinyCrm.Core.Services
             {
                 return null;
             }
-            using (var context = new TinyCrmDbContext())
-            {
-                var query = context.Set<Product>().AsQueryable();
+            
+                var query = dbContext.Set<Product>().AsQueryable();
 
-                if (searchProductOptions.Id != null)
-                {
-                    query = query.
-                    Where(c => c.Id == searchProductOptions.Id);
-                }
-                if (searchProductOptions.Description != null &&
-                    searchProductOptions.Description.Contains(":"))
+                //if (searchProductOptions.Id != null)
+                //{
+                //    query = query.
+                //    Where(c => c.Id == searchProductOptions.Id);
+                //}
+                if (searchProductOptions.Description != null)
                 {
                     query = query.
                     Where(c => c.Description == searchProductOptions.Description);
@@ -52,7 +55,7 @@ namespace TinyCrm.Core.Services
                 List<Product> products = query.ToList();
                 return products;
 
-            }
+            
         }
 
         /// <summary>
@@ -62,30 +65,36 @@ namespace TinyCrm.Core.Services
         /// <returns></returns>
         //public bool AddProduct(AddProductOptions options)
         //{
-        //    if (options == null) {
+        //    if (options == null)
+        //    {
         //        return false;
         //    }
 
-        //    var product = GetProductById(options.Id); 
+        //    var product = GetProductById(options.Id);
 
-        //    if (product != null) {
+        //    if (product != null)
+        //    {
         //        return false;
         //    }
 
-        //    if (string.IsNullOrWhiteSpace(options.Name)) {
+        //    if (string.IsNullOrWhiteSpace(options.Name))
+        //    {
         //        return false;
         //    }
 
-        //    if (options.Price <= 0) {
+        //    if (options.Price <= 0)
+        //    {
         //        return false;
         //    }
 
         //    if (options.ProductCategory ==
-        //      ProductCategory.Invalid) {
+        //      ProductCategory.Invalid)
+        //    {
         //        return false;
         //    }
 
-        //    product = new Product() {
+        //    product = new Product()
+        //    {
         //        Id = options.Id,
         //        Name = options.Name,
         //        Price = options.Price,
@@ -110,24 +119,23 @@ namespace TinyCrm.Core.Services
                 return null;
             }
 
-            if (options.Id==null)
-            {
-                return null;
-            }
+            //if (options.Id==null)
+            //{
+            //    return null;
+            //}
 
             var product = new Product();
 
-            using (var context = new TinyCrmDbContext())
-            {
+            
                 //product.Id = options.Id;
                 product.Name = options.Name;
                 product.Category = options.ProductCategory;
                 product.Price = options.Price;
 
-                context.Set<Product>().Add(product);
-                context.SaveChanges();
+                dbContext.Set<Product>().Add(product);
+                dbContext.SaveChanges();
                 return product;
-            }
+            
         }
 
         /// <summary>
@@ -136,56 +144,64 @@ namespace TinyCrm.Core.Services
         /// <param name="productId"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public bool UpdateProduct(int productId,
-            UpdateProductOptions options)
-        {
-            if (options == null) {
-                return false;
-            }
+        //public bool UpdateProduct(int productId,
+        //    UpdateProductOptions options)
+        //{
+        //    if (options == null) {
+        //        return false;
+        //    }
 
-            var product = GetProductById(productId);
-            if (product == null) { 
-                return false; 
-            }
+        //    var product = GetProductById(productId);
+        //    if (product == null) { 
+        //        return false; 
+        //    }
 
-            if (!string.IsNullOrWhiteSpace(options.Description)) {
-                product.Description = options.Description;
-            }
+        //    if (!string.IsNullOrWhiteSpace(options.Description)) {
+        //        product.Description = options.Description;
+        //    }
 
-            if (options.Price != null &&
-              options.Price <= 0) {
-                return false;
-            }
+        //    if (options.Price != null &&
+        //      options.Price <= 0) {
+        //        return false;
+        //    }
 
-            if (options.Price != null) {
-                if (options.Price <= 0) {
-                    return false;
-                } else {
-                    product.Price = options.Price.Value;
-                }
-            }
+        //    if (options.Price != null) {
+        //        if (options.Price <= 0) {
+        //            return false;
+        //        } else {
+        //            product.Price = options.Price.Value;
+        //        }
+        //    }
 
-            if (options.Discount != null &&
-              options.Discount < 0) {
-                return false;
-            }
+        //    if (options.Discount != null &&
+        //      options.Discount < 0) {
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Product GetProductById(int id)
-        {
-            if (id == null) {
-                return null;
-            } 
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <returns></returns>
+        //public Product GetProductById(int id)
+        //{
+        //    if (id == null) {
+        //        return null;
+        //    } 
 
-            return ProductsList.
-                SingleOrDefault(s => s.Id.Equals(id));
+        //    return ProductsList.
+        //        SingleOrDefault(s => s.Id.Equals(id));
+        //}
+
+        public int SumOfStocks()
+        {
+            var sum = dbContext.Set<Product>().AsQueryable().
+                Sum(c =>c.Stock);
+            return sum;
+         
         }
     }
 }

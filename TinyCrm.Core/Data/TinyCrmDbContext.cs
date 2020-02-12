@@ -14,7 +14,7 @@ namespace TinyCrm.Core.Data
 
         public TinyCrmDbContext() {
             connectionString_ = 
-                "Server =localhost; Database =newtinycrm-acc; Integrated Security=SSPI;Persist Security Info=False;";
+                "Server =localhost; Database =tinycrm-acc_final; Integrated Security=SSPI;Persist Security Info=False;";
 
         }
 
@@ -31,6 +31,15 @@ namespace TinyCrm.Core.Data
             modelBuilder
                 .Entity<Model.Customer>()
                 .ToTable("Customer", "core");
+            modelBuilder
+                .Entity<Model.Customer>()
+                .HasIndex(c=> c.VatNumber)
+                .IsUnique();
+            modelBuilder
+               .Entity<Model.Customer>()
+               .Property(c=>c.VatNumber)
+               .HasMaxLength(9)
+               .IsFixedLength();
             modelBuilder
                 .Entity<Model.Product>()
                 .ToTable("Product", "core");

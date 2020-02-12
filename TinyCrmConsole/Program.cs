@@ -29,14 +29,15 @@ namespace TinyCrmConsole
                 //var query = context.Set<Customer>().Where(c => c.Id ==1);
 
                 //var customer = query.SingleOrDefault();
-                ICustomerService customerService = new CustomerService();
+                ICustomerService customerService = new CustomerService(context);
                 var results = customerService.SearchCustomer(
                     new SearchCustomerOptions()
                     {
                         Email = "anastasia.tab@gmail.com"
                     });
                 Console.WriteLine($"Found {results.Count()} customers");
-                ProductService productService = new ProductService();
+
+                ProductService productService = new ProductService(context);
                 var newResults = productService.SearchProduct(
                     new SearchProductOptions()
                     {
@@ -44,7 +45,7 @@ namespace TinyCrmConsole
                     });
                 Console.WriteLine($"Found {newResults.Count()} products");
 
-                var results2 = customerService.SearchCustomerByName(
+                var results2 = customerService.SearchCustomer(
                     new SearchCustomerOptions()
                     {
                         FirstName = "Anastasia"
@@ -54,12 +55,15 @@ namespace TinyCrmConsole
 
                 var options = new AddProductOptions()
                 {
-                    Id=1,
+                   
                     Name = "pc",
                     Price = 1000m,
                     ProductCategory= ProductCategory.Computers
                 };
                 var newProduct = productService.CreateProduct(options);
+                var sum = productService.SumOfStocks();
+                Console.WriteLine($"Found {sum} ");
+
                 //var options = new AddCustomerOptions()
                 //{
                 //    FirstName = "Anastasia",
@@ -69,7 +73,7 @@ namespace TinyCrmConsole
                 //};
 
                 //var newCustomer = customerService.CreateCustomer(options);
-                
+
             }
         }
            
